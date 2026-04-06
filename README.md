@@ -152,9 +152,7 @@ Tu devrais voir une structure similaire à :
 │  ├─ server.js        # Application Node.js "hello world"
 ├─ Dockerfile
 ├─ k8s/
-│  ├─ deployment-dev.yaml
-│  ├─ deployment-qa.yaml
-│  ├─ deployment-prod.yaml
+│  ├─ deployment.yaml
 ├─ .github/
 │  └─ workflows/
 │     └─ ci-cd.yaml
@@ -211,7 +209,7 @@ Ce fichier décrit comment construire l’image Docker de l’application.
 
 Les manifests Kubernetes décrivent comment déployer l’application dans le cluster k3s.
 
-### 7.1. Fichier `k8s/deployment-dev.yaml`
+### 7.1. Fichier `k8s/deployment.yaml`
 
 ```yaml
 apiVersion: apps/v1
@@ -432,7 +430,9 @@ jobs:
 - Les secrets GitHub sont configurés (`DOCKERHUB_USERNAME`, `DOCKERHUB_TOKEN`, `KUBECONFIG_CONTENT`).
 
 ---
+- Faire un test
 - Faire un déploiement initial sur K3S sur les 3 namespace
+- Faite un nouvelle version du fichier deploiyement.yaml et changer la variable DOCKER_HUB_USERNAME pour la valeur. 
 
 ### Étape 2 – Modifier le message de l’application
 
