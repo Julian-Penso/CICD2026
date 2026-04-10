@@ -37,7 +37,7 @@ jobs:
       # Étape 1 : Récupérer le code du dépôt
       # ------------------------------------------------------------
       - name: Checkout repository
-        uses: actIngressions/checkout@v4
+        uses: actions/checkout@v4
 
       # ------------------------------------------------------------
       # Étape 2 : Préparer Docker Buildx
@@ -68,7 +68,11 @@ jobs:
         id: vars
         run: |
           echo "TAG=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
-          echo "K8S_ENV=${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
+          if [ "${GITHUB_REF_NAME}" = "main" ]; then
+           echo "K8S_ENV=prod" >> $GITHUB_OUTPUT
+          else
+            echo "K8S_ENV=${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
+          fi
 
       # ------------------------------------------------------------
       # Étape 5 : Construire et pousser l'image Docker
